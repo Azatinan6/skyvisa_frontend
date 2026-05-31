@@ -116,7 +116,7 @@ const FlightCard = ({ flight, initialIsSaved, initialTripId }: FlightCardProps) 
           <p className="text-sm font-semibold text-gray-900">{flight.airline}</p>
         </div>
 
-        <div className="text-right">
+        <div>
           <p className="text-xs text-gray-500 font-medium mb-1">Kişi başı başlangıç</p>
           <p className="text-2xl font-black text-blue-600">
             {flight.price.toLocaleString('tr-TR')} ₺
