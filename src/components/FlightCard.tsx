@@ -125,7 +125,7 @@ const FlightCard = ({ flight, initialIsSaved, initialTripId }: FlightCardProps) 
 
         <button
           onClick={toggleSave}
-          className={`flex items-center gap-1 px-1 py-1.5 rounded-lg text-sm font-bold transition-all duration-300 ${isSaved
+          className={`flex items-center gap-1 px-1 py-1.5 rounded-lg text-md font-bold transition-all duration-300 ${isSaved
             ? 'bg-rose-500 text-white shadow-md hover:bg-rose-600'
             : 'bg-rose-50 text-rose-600 hover:bg-rose-100 active:scale-95'
             }`}
