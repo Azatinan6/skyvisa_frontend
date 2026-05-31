@@ -123,17 +123,20 @@ const FlightCard = ({ flight, initialIsSaved, initialTripId }: FlightCardProps) 
           </p>
         </div>
 
+        {/* w-[112px] ve justify-center eklenerek genişlik sabitlendi, kayma engellendi */}
         <button
           onClick={toggleSave}
-          className={`flex items-center gap-1 px-1 py-1.5 rounded-lg text-md font-bold transition-all duration-300 ${isSaved
-            ? 'bg-rose-500 text-white shadow-md hover:bg-rose-600'
-            : 'bg-rose-50 text-rose-600 hover:bg-rose-100 active:scale-95'
-            }`}
+          className={`flex items-center justify-center gap-1 w-[112px] py-1.5 rounded-lg text-md font-bold transition-all duration-300 ${
+            isSaved
+              ? 'bg-rose-500 text-white shadow-md hover:bg-rose-600'
+              : 'bg-rose-50 text-rose-600 hover:bg-rose-100 active:scale-95'
+          }`}
         >
-          <Heart className={`w-4 h-4 ${isSaved ? 'fill-current text-white' : ''}`} />
-          {isSaved ? 'Kaydedildi' : 'Kaydet'}
+          <Heart className={`w-4 h-4 shrink-0 ${isSaved ? 'fill-current text-white' : ''}`} />
+          <span>{isSaved ? 'Kaydedildi' : 'Kaydet'}</span>
         </button>
       </div>
+
 
     </div>
   );
