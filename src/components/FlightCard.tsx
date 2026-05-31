@@ -83,7 +83,7 @@ const FlightCard = ({ flight, initialIsSaved, initialTripId }: FlightCardProps) 
         <div className="relative h-64 w-full overflow-hidden">
           <img
            // Tekrar backend'in canlı linkine ve oradan gelen imageUrl verisine bağladık
-            src={`https://skyvisa-api.onrender.com/images/${flight.destination}.jpg`}
+            src={`https://skyvisa-api.onrender.com/images/${flight.destinationCity}.jpg`}
             alt={flight.destination}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
             onError={(e) => {
@@ -113,7 +113,7 @@ const FlightCard = ({ flight, initialIsSaved, initialTripId }: FlightCardProps) 
             <Plane className="w-4 h-4 text-gray-400" />
             Havayolu
           </p>
-          <p className="font-semibold text-gray-900">{flight.airline}</p>
+          <p className="text-sm font-semibold text-gray-900">{flight.airline}</p>
         </div>
 
         <div className="text-right">
