@@ -51,7 +51,7 @@ const DashboardPage = () => {
                                 <h3 className="font-bold text-xl text-gray-900 flex items-center gap-2">
                                     <MapPin className="w-5 h-5 text-blue-500" />
                                     {/* Backend'den gelen şehir objeyse trip.destinationCity.name, String ise trip.destinationCity yazılır */}
-                                    {trip.destinationCity?.name || "Bilinmeyen Şehir"} 
+                                    {trip.destinationCity|| "Bilinmeyen Şehir"} 
                                 </h3>
                                 {/* Ülke adını hemen şehrin altına daha küçük bir fontla yerleştirdik (ml-7 ile ikonun hizasına getirdik) */}
                                 <p className="text-gray-500 text-sm mt-1 ml-7">
