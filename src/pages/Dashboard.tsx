@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { useAuthStore } from '../store/useAuthStore';
 import { Navigate } from 'react-router-dom';
 import api from '../services/api';
-// Çöp kutusu ikonunu (Trash2) ekledik
 import { MapPin, Wallet, Trash2 } from 'lucide-react';
-import toast from 'react-hot-toast'; // Şık bildirimler için
+import toast from 'react-hot-toast';
 
 const DashboardPage = () => {
     const { isAuthenticated } = useAuthStore();
@@ -22,7 +21,6 @@ const DashboardPage = () => {
     const handleDelete = async (tripId: number) => {
         try {
             await api.delete(`/trips/${tripId}`);
-            // Başarılı olursa, silinen öğeyi ekrandan anında kaldır (Sayfayı yenilemeye gerek kalmadan)
             setMyTrips(myTrips.filter(trip => trip.id !== tripId));
             toast.success("Plan başarıyla silindi.");
         } catch (error) {
@@ -48,23 +46,29 @@ const DashboardPage = () => {
                     {myTrips.map((trip) => (
                         <div key={trip.id} className="relative bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center hover:shadow-md transition group">
 
-                            {/* KARTIN İÇERİĞİ */}
+                            {/* KARTIN İÇERİĞİ: Şehir ve Ülke Birleştirildi */}
                             <div>
                                 <h3 className="font-bold text-xl text-gray-900 flex items-center gap-2">
                                     <MapPin className="w-5 h-5 text-blue-500" />
-                                    {trip.destinationCountry?.name || "Bilinmiyor"}
+                                    {/* Backend'den gelen şehir objeyse trip.destinationCity.name, String ise trip.destinationCity yazılır */}
+                                    {trip.destinationCity || "Bilinmeyen Şehir"} 
                                 </h3>
-                                <p className="text-gray-500 text-sm mt-1">Kayıtlı Plan</p>
+                                {/* Ülke adını hemen şehrin altına daha küçük bir fontla yerleştirdik (ml-7 ile ikonun hizasına getirdik) */}
+                                <p className="text-gray-500 text-sm mt-1 ml-7">
+                                    {trip.destinationCountry?.name || "Bilinmeyen Ülke"}
+                                </p>
                             </div>
 
-                            <div className="text-right mr-8"> {/* Sil butonuna yer açmak için mr-8 ekledik */}
+                            <div className="text-right mr-8"> 
                                 <div className="flex items-center gap-1 justify-end text-emerald-600 font-bold mb-1">
                                     <Wallet className="w-4 h-4" /> Bütçe
                                 </div>
-                                <span className="text-xl font-black text-gray-800">{trip.budget} ₺</span>
+                                <span className="text-xl font-black text-gray-800">
+                                    {trip.budget ? trip.budget.toLocaleString('tr-TR') : 0} ₺
+                                </span>
                             </div>
 
-                            {/* SİL BUTONU (Mutlak pozisyonla sağ köşeye yerleşir, hover ile belirginleşir) */}
+                            {/* SİL BUTONU */}
                             <button
                                 onClick={() => handleDelete(trip.id)}
                                 className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-gray-300 hover:text-rose-500 hover:bg-rose-50 rounded-full transition-all duration-200"
